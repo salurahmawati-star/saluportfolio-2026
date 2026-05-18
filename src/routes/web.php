@@ -1,23 +1,52 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Livewire\Livewire;
-use Illuminate\Support\Facades\Response;
+use App\Models\Portfolio;
+use App\Http\Controllers\ContactMessageController;
 
-/* NOTE: Do Not Remove
-/ Livewire asset handling if using sub folder in domain
-*/
-
-Livewire::setUpdateRoute(function ($handle) {
-    return Route::post(config('app.asset_prefix') . '/livewire/update', $handle);
-});
-
-Livewire::setScriptRoute(function ($handle) {
-    return Route::get(config('app.asset_prefix') . '/livewire/livewire.js', $handle);
-});
 /*
-/ END
+|--------------------------------------------------------------------------
+| HOME
+|--------------------------------------------------------------------------
 */
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+
+/*
+|--------------------------------------------------------------------------
+| PORTFOLIO LIST
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/portfolio', function () {
+
+    $portfolios = Portfolio::latest()->get();
+
+    return view('portfolio.index', compact('portfolios'));
+
+})->name('portfolio.index');
+
+/*
+|--------------------------------------------------------------------------
+| PORTFOLIO DETAIL
+|--------------------------------------------------------------------------
+*/
+
+Route::get('/portfolio/{slug}', function ($slug) {
+
+    $portfolio = Portfolio::where('slug', $slug)->firstOrFail();
+
+    return view('portfolio.detail', compact('portfolio'));
+
+})->name('portfolio.show');
+
+/*
+|--------------------------------------------------------------------------
+| CONTACT FORM
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/contact', [ContactMessageController::class, 'store'])
+    ->name('contact.store');
