@@ -40,6 +40,12 @@ class ProjectResource extends Resource
             RichEditor::make('solution')
                 ->required()
                 ->label('Solusi & Perancangan'),
+            
+            RichEditor::make('features')
+                ->label('Fitur Utama'),
+
+            RichEditor::make('implementation_result')
+                ->label('Hasil Implementasi'),
 
             TextInput::make('tech_stack')
                 ->required()

@@ -19,7 +19,8 @@ class DatabaseSeeder extends Seeder
             ProjectSeeder::class,
             ContactMessageSeeder::class,
             ProfileSeeder::class,
-            CategorySeeder::class
+            CategorySeeder::class,
+            SkillSeeder::class
         ]);
     }
 }

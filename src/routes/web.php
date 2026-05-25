@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Models\Portfolio;
+use App\Models\Project;
 use App\Http\Controllers\ContactMessageController;
 
 /*
@@ -12,35 +12,33 @@ use App\Http\Controllers\ContactMessageController;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 /*
 |--------------------------------------------------------------------------
-| PORTFOLIO LIST
+| PROJECT LIST
 |--------------------------------------------------------------------------
 */
 
-Route::get('/portfolio', function () {
+Route::get('/projects', function () {
 
-    $portfolios = Portfolio::latest()->get();
+    $projects = Project::latest()->get();
 
-    return view('portfolio.index', compact('portfolios'));
+    return view('portfolio.index', compact('projects'));
 
-})->name('portfolio.index');
+})->name('project.index');
 
 /*
 |--------------------------------------------------------------------------
-| PORTFOLIO DETAIL
+| PROJECT DETAIL
 |--------------------------------------------------------------------------
 */
 
-Route::get('/portfolio/{slug}', function ($slug) {
+Route::get('/project/{project}', function (Project $project) {
 
-    $portfolio = Portfolio::where('slug', $slug)->firstOrFail();
+    return view('portfolio.detail', compact('project'));
 
-    return view('portfolio.detail', compact('portfolio'));
-
-})->name('portfolio.show');
+})->name('project.show');
 
 /*
 |--------------------------------------------------------------------------

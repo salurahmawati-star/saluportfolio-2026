@@ -18,7 +18,9 @@ Free HTML CSS Template
 </head>
 <body>
     @php
-    $portfolios = \App\Models\Portfolio::latest()->get();
+    $profile = \App\Models\Profile::first();
+    $projects = \App\Models\Project::latest()->get();
+    $skills = \App\Models\Skill::all();
 @endphp
     <nav id="navbar">
         <div class="nav-container">
@@ -72,8 +74,8 @@ Free HTML CSS Template
             </div>
         </div>
         <div class="hero-content">
-            <h1>Salu Portofolio</h1>
-            <p class="subtitle">Web Developer Student</p>
+            <h1>{{ $profile?->name }}</h1>
+            <p class="subtitle">{{ $profile?->title }}</p>
             <p>Membangun aplikasi web modern menggunakan Laravel, Livewire, dan Filament</p>
             <div class="cta-buttons">
                 <a href="#portfolio" class="cta-primary">View My Projects</a>
@@ -109,20 +111,19 @@ Free HTML CSS Template
                     <div class="about-image"></div>
                     <div class="about-text">
                         <h3>Tentang Saya</h3>
-                        <p>Saya adalah mahasiswa yang sedang menempuh studi di bidang teknologi informasi dengan fokus pada pengembangan web modern.</p>
-                        <p>Saat ini saya sedang mempelajari Laravel, Livewire, Filament v3, dan Docker untuk membangun aplikasi berbasis backend dan dashboard admin. <a href="https://timermo.com" rel="nofollow" target="_blank"></a> Saya aktif mengerjakan project pembelajaran seperti sistem portfolio, CRUD management, dan sistem laporan project sebagai latihan pengembangan skill. </p>
+                        <p>{{ $profile?->bio }}</p>
                     </div>
                 </div>
                 
                 <div class="about-cards">
                     <div class="about-card">
                         <h4>🎯 Mission</h4>
-                        <p>To create digital systems that are simple, functional, and easy to use.</p>
+                        <p>{{ $profile?->mission }}</p>
                     </div>
                     
                     <div class="about-card">
                         <h4>💡 Vision</h4>
-                        <p>Menjadi Full Stack Developer yang mampu membangun aplikasi web profesional berbasis Laravel.</p>
+                        <p>{{ $profile?->vision }}</p>
                     </div>
                 </div>
             </div>
@@ -169,38 +170,27 @@ Free HTML CSS Template
                     </div>
                     
                     <div class="skills-list">
-                        <div class="skill-item">
-                            <h4>Laravel Development</h4>
-                            <p> Membangun aplikasi web modern menggunakan Laravel, Filament v3,Livewire, dan arsitektur backend yang terstruktur.</p>
-                            <div class="skill-progress">
-                                <div class="skill-progress-bar" style="width: 95%"></div>
-                            </div>
+
+                @foreach($skills as $skill)
+
+                    <div class="skill-item">
+
+                        <h4>{{ $skill->title }}</h4>
+
+                        <p>{{ $skill->description }}</p>
+
+                        <div class="skill-progress">
+                            <div
+                                class="skill-progress-bar"
+                                style="width: {{ $skill->percentage }}%"
+                            ></div>
                         </div>
-                        
-                        <div class="skill-item">
-                            <h4>Backend & UI Integration</h4>
-                            <p>Mengembangkan dashboard admin, CRUD management, authentication, dan sistem berbasis database.</p>
-                            <div class="skill-progress">
-                                <div class="skill-progress-bar" style="width: 90%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <h4>Web Application Development</h4>
-                            <p>Menjalankan project development menggunakan Docker agar environment lebih stabil dan konsisten.</p>
-                            <div class="skill-progress">
-                                <div class="skill-progress-bar" style="width: 85%"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="skill-item">
-                            <h4>Clean Code & Project Structure</h4>
-                            <p>Menyusun struktur project Laravel yang rapi, scalable, dan mudah dikembangkan.</p>
-                            <div class="skill-progress">
-                                <div class="skill-progress-bar" style="width: 92%"></div>
-                            </div>
-                        </div>
+
                     </div>
+
+                @endforeach
+
+            </div>
                 </div>
             </div>
         </div>
@@ -216,18 +206,17 @@ Free HTML CSS Template
 
             <div class="portfolio-grid">
 
-    @foreach($portfolios as $portfolio)
+    @foreach($projects as $project)
 
-        <a 
-            href="{{ route('portfolio.show', $portfolio->slug) }}"
-            class="portfolio-card"
-            style="text-decoration: none;"
-        >
-
+<a
+    href="{{ route('project.show', $project) }}"
+    class="portfolio-card"
+    style="text-decoration: none;"
+>
             <div 
                 class="portfolio-image"
                 style="
-                    background-image: url('{{ asset('storage/' . $portfolio->image) }}');
+                    background-image: url('{{ asset('storage/' . $project->diagram) }}');
                     background-size: cover;
                     background-position: center;
                     height: 250px;
@@ -236,11 +225,11 @@ Free HTML CSS Template
 
             <div class="portfolio-content">
                 <h3 class="portfolio-title">
-                    {{ $portfolio->title }}
+                    {{ $project->title }}
                 </h3>
 
                 <p class="portfolio-description">
-                    {{ $portfolio->description }}
+                    {{ $project->short_description }}
                 </p>
             </div>
 

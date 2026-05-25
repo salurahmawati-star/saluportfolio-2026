@@ -11,6 +11,8 @@ class Project extends Model
         'short_description',
         'problem_analysis',
         'solution',
+        'features',
+        'implementation_result',
         'tech_stack',
         'diagram',
         'pdf_report',
