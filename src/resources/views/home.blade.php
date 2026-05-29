@@ -76,25 +76,10 @@ Free HTML CSS Template
         <div class="hero-content">
             <h1>{{ $profile?->name }}</h1>
             <p class="subtitle">{{ $profile?->title }}</p>
-            <p>Membangun aplikasi web modern menggunakan Laravel, Livewire, dan Filament</p>
+            <p>{{ $profile?->tagline }}</p>
             <div class="cta-buttons">
                 <a href="#portfolio" class="cta-primary">View My Projects</a>
                 <a href="#contact" class="cta-secondary">Let's Talk</a>
-            </div>
-            
-            <div class="stats-section">
-                <div class="stat-card">
-                    <span class="stat-number">10+</span>
-                    <span class="stat-label">Projects</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">mahasiswa</span>
-                    <span class="stat-label">Teknik informatika</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number">4</span>
-                    <span class="stat-label">Semester</span>
-                </div>
             </div>
         </div>
     </section>
@@ -102,18 +87,34 @@ Free HTML CSS Template
     <section id="about" class="fade-in">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">About Me</h2>
-                <p class="section-subtitle">Fokus membangun aplikasi web modern yang cepat, terstruktur, dan mudah digunakan.</p>
+                <h2 class="section-title">
+                    {{ $settings['about_title'] ?? 'About Me' }}
+                </h2>
             </div>
 
             <div class="about-content">
                 <div class="about-intro">
-                    <div class="about-image"></div>
-                    <div class="about-text">
-                        <h3>Tentang Saya</h3>
-                        <p>{{ $profile?->bio }}</p>
+
+                    <div class="about-image">
+                        @if($profile?->photo)
+                            <img
+                                src="{{ asset('storage/' . $profile->photo) }}"
+                                alt="{{ $profile->name }}"
+                                style="
+                                    width: 100%;
+                                    height: 100%;
+                                    object-fit: cover;
+                                    border-radius: 50%;
+                                "
+                            >
+                        @endif
                     </div>
-                </div>
+
+        <div class="about-text">
+            <p>{{ $profile?->bio }}</p>
+        </div>
+
+    </div>
                 
                 <div class="about-cards">
                     <div class="about-card">
@@ -133,8 +134,12 @@ Free HTML CSS Template
     <section id="skills" class="fade-in">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Skills & Expertise</h2>
-                <p class="section-subtitle">Combining technical excellence with creative vision</p>
+                <h2 class="section-title">
+                {{ $settings['skills_title'] ?? 'Skills & Expertise' }}
+            </h2>
+                <p class="section-subtitle">
+                    {{ $settings['skills_subtitle'] ?? '' }}
+                </p>
             </div>
 
             <div class="skills-container">
@@ -200,9 +205,12 @@ Free HTML CSS Template
     <section id="portfolio" class="fade-in">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">My Projects</h2>
-                <p class="section-subtitle">Kumpulan proyek terpilih yang dibangun dengan teknologi modern dan praktik pengembangan yang baik</p>
-            </div>
+                <h2 class="section-title">
+                {{ $settings['portfolio_title'] ?? 'My Projects' }}
+            </h2>
+                <p class="section-subtitle">
+                {{ $settings['portfolio_subtitle'] ?? '' }}
+            </p>
 
             <div class="portfolio-grid">
 
@@ -231,6 +239,24 @@ Free HTML CSS Template
                 <p class="portfolio-description">
                     {{ $project->short_description }}
                 </p>
+                <div class="project-progress">
+                    <p style="color:#60a5fa;">
+                        <strong>Status:</strong>
+                        {{ $project->progress == 100 ? 'Completed ✅' : 'On Going 🚀' }}
+                    </p>
+
+                    <p style="color:white;">
+                        Progress Project {{ $project->progress }}%
+                    </p>
+
+                    <div class="progress-bar">
+                        <div
+                            class="progress-fill"
+                            style="width: {{ $project->progress }}%;"
+                        ></div>
+                    </div>
+
+                </div>
             </div>
 
         </a>
@@ -242,29 +268,13 @@ Free HTML CSS Template
     <section id="contact" class="fade-in">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Let's Create Together</h2>
-                <p class="section-subtitle">Ready to bring your ideas to life? Let's start a conversation</p>
+                <h2 class="section-title">
+                {{ $settings['contact_title'] ?? "Let's Create Together" }}
+            </h2>
+                <p class="section-subtitle">
+                {{ $settings['contact_subtitle'] ?? '' }}
+            </p>
             </div>
-
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>Hubungi Saya</h3>
-                    <p>Saya selalu antusias untuk mengerjakan proyek baru dan berkolaborasi dengan orang-orang hebat. Jika Anda memiliki proyek tertentu atau sekadar ingin berdiskusi, saya dengan senang hati akan mendengarkannya.</p>
-                    
-                    <div class="contact-details">
-                        <h4>💼 Available for:</h4>
-                        <ul>
-                            <li>Freelance kecil</li>
-                            <li>Project kampus</li>
-                            <li>Learning collaboration</li>
-                        </ul>
-                    </div>
-
-                    <div class="contact-details">
-                        <h4>📍 Based in:</h4>
-                        <p>Indonesia (Remote Friendly)</p>
-                    </div>
-                </div>
 
                 <div class="contact-form-container">
 

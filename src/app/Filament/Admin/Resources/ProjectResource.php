@@ -22,34 +22,52 @@ class ProjectResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationLabel = 'Projects';
+
     public static function form(Form $form): Form
     {
         return $form->schema([
+
             TextInput::make('title')
                 ->required()
                 ->label('Judul Project'),
 
+            TextInput::make('progress')
+                ->numeric()
+                ->minValue(0)
+                ->maxValue(100)
+                ->default(0)
+                ->suffix('%')
+                ->required()
+                ->label('Progress Project'),
+
             Textarea::make('short_description')
                 ->required()
-                ->label('Deskripsi Singkat'),
+                ->label('Deskripsi Singkat')
+                ->columnSpanFull(),
 
             RichEditor::make('problem_analysis')
                 ->required()
-                ->label('Analisis Masalah'),
+                ->label('Analisis Masalah')
+                ->columnSpanFull(),
 
             RichEditor::make('solution')
                 ->required()
-                ->label('Solusi & Perancangan'),
-            
+                ->label('Solusi & Perancangan')
+                ->columnSpanFull(),
+
             RichEditor::make('features')
-                ->label('Fitur Utama'),
+                ->label('Fitur Utama')
+                ->columnSpanFull(),
 
             RichEditor::make('implementation_result')
-                ->label('Hasil Implementasi'),
+                ->label('Hasil Implementasi')
+                ->columnSpanFull(),
 
             TextInput::make('tech_stack')
                 ->required()
-                ->label('Tech Stack'),
+                ->label('Tech Stack')
+                ->helperText('Pisahkan dengan koma. Contoh: Laravel, Filament, Livewire, MariaDB, Docker'),
 
             FileUpload::make('diagram')
                 ->image()
@@ -58,23 +76,66 @@ class ProjectResource extends Resource
 
             FileUpload::make('pdf_report')
                 ->directory('projects/pdf')
-                ->acceptedFileTypes(['application/pdf'])
+                ->acceptedFileTypes([
+                    'application/pdf',
+                ])
                 ->label('Laporan PDF'),
+
         ]);
     }
 
     public static function table(Table $table): Table
     {
-        return $table->columns([
-            TextColumn::make('title')->searchable()->sortable(),
-            TextColumn::make('tech_stack'),
-            ImageColumn::make('diagram'),
-            TextColumn::make('created_at')->dateTime(),
-        ])
-        ->actions([
-            Tables\Actions\EditAction::make(),
-            Tables\Actions\DeleteAction::make(),
-        ]);
+        return $table
+            ->columns([
+
+                TextColumn::make('title')
+                    ->label('Judul Project')
+                    ->searchable()
+                    ->sortable(),
+
+                TextColumn::make('progress')
+                    ->label('Progress')
+                    ->suffix('%')
+                    ->badge()
+                    ->color(fn ($state) => match (true) {
+                        $state >= 100 => 'success',
+                        $state >= 75 => 'info',
+                        $state >= 50 => 'warning',
+                        default => 'danger',
+                    }),
+
+                TextColumn::make('tech_stack')
+                    ->limit(40),
+
+                ImageColumn::make('diagram')
+                    ->label('Diagram'),
+
+                TextColumn::make('created_at')
+                    ->label('Dibuat')
+                    ->dateTime('d M Y H:i')
+                    ->sortable(),
+
+            ])
+            ->filters([
+                //
+            ])
+            ->actions([
+                Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
+            ]);
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array

@@ -26,6 +26,10 @@ class ProfileResource extends Resource
             Forms\Components\TextInput::make('title')
                 ->maxLength(255),
 
+            Forms\Components\Textarea::make('tagline')
+                ->label('Tagline')
+                ->columnSpanFull(),
+
             Forms\Components\Textarea::make('bio')
                 ->required()
                 ->columnSpanFull(),

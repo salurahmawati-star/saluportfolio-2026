@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Models\Project;
+use App\Models\Setting;
 use App\Http\Controllers\ContactMessageController;
 
 /*
@@ -11,7 +12,11 @@ use App\Http\Controllers\ContactMessageController;
 */
 
 Route::get('/', function () {
-    return view('home');
+
+    $settings = Setting::pluck('value', 'key');
+
+    return view('home', compact('settings'));
+
 })->name('home');
 
 /*

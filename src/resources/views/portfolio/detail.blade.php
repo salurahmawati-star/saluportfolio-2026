@@ -8,6 +8,30 @@
     <link rel="stylesheet" href="{{ asset('assets/template/css/tooplate-titan-style.css') }}">
 
     <style>
+        .project-progress{
+            margin-top:20px;
+        }
+
+        .progress-info{
+            display:flex;
+            justify-content:space-between;
+            margin-bottom:10px;
+            font-weight:600;
+        }
+
+        .progress-bar{
+            width:100%;
+            height:12px;
+            background:#e5e7eb;
+            border-radius:999px;
+            overflow:hidden;
+        }
+
+        .progress-fill{
+            height:100%;
+            background:#2563eb;
+            border-radius:999px;
+        }
         .project-container{
             max-width:1200px;
             margin:auto;
@@ -104,6 +128,19 @@
         <h1 class="project-title">
             {{ $project->title }}
         </h1>
+        <div class="project-progress">
+            <div class="progress-info">
+                <span>Progress Project</span>
+                <span>{{ $project->progress }}%</span>
+            </div>
+
+            <div class="progress-bar">
+                <div
+                    class="progress-fill"
+                    style="width: {{ $project->progress }}%;"
+                ></div>
+            </div>
+        </div>
 
         <p class="project-description">
             {{ $project->short_description }}
