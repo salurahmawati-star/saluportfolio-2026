@@ -1,4 +1,6 @@
-# 🚀 Salu Portfolio
+# 🚀 Salu Portfolio 
+
+Salu Rahmawati (20240801001)
 
 Website portfolio pribadi yang dibangun menggunakan Laravel, Filament v3, Livewire, dan MariaDB. Project ini digunakan untuk menampilkan profil, keterampilan, pengalaman pengembangan, serta portofolio project secara dinamis melalui dashboard admin.
 
