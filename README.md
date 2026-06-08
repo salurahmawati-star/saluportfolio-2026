@@ -1,6 +1,10 @@
-# 🚀 Salu Portfolio 
+# 🚀 Salu Portfolio ( UTS Pemprograman Web)
 
-Salu Rahmawati (20240801001)
+NIM : 20240801001
+Program Studi : Informatika
+Universitas : Esa Unggul
+Semester : 4
+
 
 Website portfolio pribadi yang dibangun menggunakan Laravel, Filament v3, Livewire, dan MariaDB. Project ini digunakan untuk menampilkan profil, keterampilan, pengalaman pengembangan, serta portofolio project secara dinamis melalui dashboard admin.
 
