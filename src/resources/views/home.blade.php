@@ -341,23 +341,13 @@ Free HTML CSS Template
             <p class="footer-copyright">
                 © 2026 salu Folio. All rights reserved.
             </p>
-            <div class="footer-credits">
-                <a href="https://www.tooplate.com" target="_blank" rel="noopener noreferrer" class="footer-credit-link tooplate">
-                    <span class="footer-credit-icon">🎨</span>
-                    <span>Design by Tooplate</span>
-                </a>
-                <div class="footer-divider"></div>
-                <a href="https://fonts.google.com" target="_blank" rel="noopener noreferrer" class="footer-credit-link">
-                    <span class="footer-credit-icon">📝</span>
-                    <span>Google Fonts</span>
-                </a>
-                <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" class="footer-credit-link">
-                    <span class="footer-credit-icon">📸</span>
-                    <span>Unsplash</span>
-                </a>
-                <a href="https://cdnjs.com" target="_blank" rel="noopener noreferrer" class="footer-credit-link">
-                    <span class="footer-credit-icon">⚡</span>
-                    <span>CDNJS</span>
+
+                <a href="https://github.com/salurahmawati-star"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="footer-credit-link">
+                    <span class="footer-credit-icon">🐙</span>
+                    <span>GitHub-@salurahmawati-star</span>
                 </a>
             </div>
         </div>
